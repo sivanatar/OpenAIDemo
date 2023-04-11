@@ -1,0 +1,123 @@
+﻿@using System.Text.Json
+@using System.Text.Json.Serialization
+
+@{
+    ViewData["Title"] = "Tutorial page for OpenAI API";
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        var requestViewModel = "";
+        requestViewModel = @Html.Raw(JsonSerializer.Serialize(new RequestViewModel()));
+
+        $(function () {
+            var url = '@Url.Action("PostRequest", "Home")';
+           
+
+            $("#btn-submit-request").click(function () {
+                requestViewModel = collectRequest();
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: requestViewModel,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "html",
+                    success: function (response) {
+                        $("#textAreaResponse").val(response);
+                    },
+                    failure: function (response) {
+                        $("#textAreaResponse").val(response);
+                    },
+                    error: function (response) {
+                        $("#textAreaResponse").val(response);
+                    }
+                });
+            });
+        });
+        function collectRequest(){
+            var selectedModel = $('#select-model').find(":selected").val();
+
+            requestViewModel.Request = $("#textAreaRequest").val();
+            requestViewModel.Mode = "completions";
+            requestViewModel.Model = selectedModel;//"text-davinci-002";
+            return requestViewModel
+        }
+    </script>
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" action="/Demo/PostRequest">
+    <table width="100%" class="table-borderless table-responsive" border='0'>
+        <tr>
+            <td width="15%" style="border-color:rgba(125,0,0,0.1);">
+                <div  style="height: 100vh; background-color: rgba(125,0,0,0.1);"></div>
+            </td>
+            <td width="65%" style="border-color:rgba(255,0,0,0.1);">
+                <div style="height: 100vh; background-color: rgba(255,0,0,0.1);">
+                    <div class="row pt-3">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            <div>Request:</div>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            <div></div>
+                            <div class="form-group col-10">
+                                <textarea class="form-control" id="textAreaRequest" style="height: 40vh;"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-3">
+                        <div class="col-9"></div>
+                        <div class="col-3">
+                            <button type="button" class="btn btn-primary" asp-action="PostRequest" id="btn-submit-request">Submit</button>
+                        </div>
+                    </div>
+
+                    <div class="row  mb-2">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            <div>Response:</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            <div></div>
+                            <div class="form-group col-10">
+                                <textarea class="form-control" id="textAreaResponse" style="height: 40vh;"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </td>
+            <td width="20%">
+               <div class=" " style="height: 100vh; background-color: rgba(33,0,0,0.1);">
+                   <div class="row pt-3">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            <span class="mr-3">Model: </span>
+                            <select class="custom-select" id="select-model">
+                                <option selected value="davinci">Davinci</option>
+                                <option value="gpt-3.5-turbo" disabled>GPT-3.5-turbo</option>
+                                <option value="ada">Ada</option>
+                                <option value="babbage">Babbage</option>
+                                <option value="Curie">Curie</option>
+                            </select>
+                        </div>
+                   </div>
+               </div>
+            </td>
+        </tr>
+    </table>
+</form>
