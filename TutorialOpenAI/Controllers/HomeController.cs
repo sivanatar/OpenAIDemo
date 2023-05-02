@@ -36,7 +36,7 @@ namespace TutorialOpenAI.Controllers
                 Model = requestViewModel.Model,
                 Prompt = requestViewModel.Request,
                 Temperature = 0.7f,
-                MaxTokens = 20,
+                MaxTokens = 50,
                 Mode = requestViewModel.Mode
             };
             var openAIService = new OpenAIService();

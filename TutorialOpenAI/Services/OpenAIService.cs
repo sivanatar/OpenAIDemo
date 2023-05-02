@@ -10,8 +10,8 @@ namespace TutorialOpenAI.Services
         public IGenerativeAIResponse GenerateText(IGenerativeAIRequest request)
         {
             HttpClient client = new HttpClient();
-
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "<your key>");
+            var openAiApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", openAiApiKey);
 
             var json = JsonSerializer.Serialize(request);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
