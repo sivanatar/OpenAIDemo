@@ -1,10 +1,11 @@
 ﻿@using System.IO
 
 @{
-    ViewData["Title"] = "Home Page for Open AI tutorial";
+    ViewData["Title"] = "Home Page for Open AI API Demo";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome to Open AI tutorial</h1>
-    <h2>@Environment.GetEnvironmentVariable("OPENAI_API_KEY")</h2>
+    <h1 class="display-4">Welcome to Open AI API demo.</h1>
+    <h2>Relies on 'OPENAI_API_KEY' environment variable.</h2>
+    <h3>'OPENAI_API_KEY' environment variable => @Environment.GetEnvironmentVariable("OPENAI_API_KEY")</h3>
 </div>

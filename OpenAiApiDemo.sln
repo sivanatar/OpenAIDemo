@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenAIDemo", "src\OpenAIDemo.csproj", "{C4DCD061-C1DD-4948-B999-0B253955117E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenAIDemo", "src\OpenAiApiDemo.csproj", "{C4DCD061-C1DD-4948-B999-0B253955117E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
